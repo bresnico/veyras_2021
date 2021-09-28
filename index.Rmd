@@ -1,0 +1,31 @@
+---
+title: "Présentation des données - Rapport"
+subtitle: "Veyras - 2020/2021"
+author: "Jean-Paul Fai"
+date: "`r format(Sys.time(), '%d.%m.%Y')`"
+toc-title: "Table des matières"
+output:
+  officedown::rdocx_document:
+    reference_docx: "template2.docx"
+    toc: true
+    toc_depth: 1
+---
+
+```{r setup, include=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(knitr)
+library(tidyverse)
+library(lubridate)
+library(rio)
+library(readxl)
+library(ggrepel) # pour les labels des plots
+library(limer)
+```
+
+```{r import-clean}
+
+d <- read_excel("data.xlsx")
+
+```
+
+
