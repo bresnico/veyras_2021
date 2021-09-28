@@ -1,0 +1,59 @@
+échelles : 
+
+cyc 
+factor
+Cycle 1
+Cycle 2
+Autre
+
+dp_connu
+factor
+Oui
+Non
+
+sex
+factor
+Féminin
+Masculin
+
+exp
+factor
+moins de 5 ans
+entre 5 et 10 ans
+plus de 10 ans
+
+sep16
+
+mot19
+Pas du tout pour cette raison
+Très peu pour cette raison
+Un peu pour cette raison
+Modérément pour cette raison
+Fortement pour cette raison
+Très fortement pour cette raison
+Exactement pour cette raison
+
+
+inverser : 8 -  
+mot19_6
+mot19_11
+mot19_16
+
+be5
+Pas du tout d'accord
+Pas d'accord
+Plutôt pas d'accord
+Moyennement d'accord
+Plutôt d'accord
+D'accord
+Tout à fait d'accord
+
+cust8
+item par item...
+Jamais
+Rarement
+Souvent
+Toujours
+
+
+
