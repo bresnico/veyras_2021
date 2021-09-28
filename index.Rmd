@@ -67,6 +67,9 @@ d <- d %>%
 d <- d %>% 
       mutate(sco_mot  = rowMeans(select(.,starts_with("mot")) ,na.rm =T))
 
+t <- d %>%
+  count(sex, cyc, dp_connu, sort = TRUE)
+
 ```
 
 ```{r plots}
@@ -78,6 +81,7 @@ d <- d %>%
 
 
 ```{r tabs}
+
 sample1 <- d %>% 
   group_by(cyc) %>% 
   select(cyc, dp_connu, sex, exp) %>% 
@@ -103,6 +107,14 @@ Les tableaux suivants proposent un résumé des données.
 
 ## Echantillon
 ```{r sample, tab.id="sample", tab.cap="Résumé de l'échantillon", tab.cap.style="Table Caption"}
+
+fl_w0 <- 6.3/ncol(t)
+fl0 <- flextable::flextable(t)
+fl0 <- flextable::width(fl0, width = fl_w0)
+fl0 <- flextable::set_header_labels(fl0, cyc = "Cycle", dp_connu="connait la DP", sex ="Genre", "n()" = "Nombre")
+fl0 <- flextable::font(fl0, fontname="calibri")
+fl0
+
 fl_w <- 6.3/ncol(sample1)
 fl <- flextable::flextable(sample1)
 fl <- flextable::width(fl, width = fl_w)
@@ -162,7 +174,7 @@ pos <- position_jitter(width = 0.2, seed = 2)
 
 mot_vis <- d %>%
   ggplot() +
-  aes(x = sex, y = sco_mot, alpha = 0.8) +
+  aes(x = sex, y = sco_mot, alpha = 0.8, color = sex) +
   geom_boxplot(outlier.colour = NA) +
   geom_jitter(position = pos, size = 5, alpha = .5, show.legend = FALSE) + 
   geom_label_repel(position = pos, aes(label=id), size = 4, color = "black", max.overlaps = Inf) +
@@ -173,11 +185,23 @@ mot_vis <- d %>%
   ylim(1,7) +
   theme(plot.title = element_text(hjust = 0.5))
 
+mot_vis2 <- d %>%
+  ggplot() +
+  aes(y = sco_mot, x = cyc, alpha = 0.8, color = cyc) +
+  geom_jitter(position = pos, size = 5, alpha = .5, show.legend = FALSE) + 
+  theme(legend.position='none') +
+  ggtitle("Visualisation des scores") +
+  ylab("Score de motivation") +
+  xlab("Catégorie de personnel") +
+  ylim(1,7) +
+  theme(plot.title = element_text(hjust = 0.5))
+
 ```
 
 ```{r mot_vis, fig.id="mot_vis", fig.align='center', out.width = "100%", fig.retina = 3, fig.show = "hold", fig.cap='distribution des scores', echo=FALSE, warning=FALSE}
 
 mot_vis
+mot_vis2
 ```
 
 explication du plot 
@@ -202,11 +226,23 @@ be_vis <- d %>%
   ylim(1,7) +
   theme(plot.title = element_text(hjust = 0.5))
 
+be_vis2 <- d %>%
+  ggplot() +
+  aes(y = sco_be, x = cyc, alpha = 0.8, color = cyc) +
+  geom_jitter(position = pos, size = 5, alpha = .5, show.legend = FALSE) + 
+  theme(legend.position='none') +
+  ggtitle("Visualisation des scores") +
+  ylab("Score de bien-être") +
+  xlab("Catégorie de personnel") +
+  ylim(1,7) +
+  theme(plot.title = element_text(hjust = 0.5))
+
 ```
 
 ```{r be_vis, fig.id="be_vis", fig.align='center', out.width = "100%", fig.retina = 3, fig.show = "hold", fig.cap='distribution des scores', echo=FALSE, warning=FALSE}
 
 be_vis
+be_vis2
 ```
 
 
@@ -241,6 +277,7 @@ fl_cust
 ```
 
 explication du tableau 
+
 
 # Interprétation
 
